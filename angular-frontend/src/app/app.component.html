@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Primer Bank</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light justify-content-between navbar-expand-lg">
+        <a class="navbar-brand"> <img src="../assets/Images/logo.jpg"  alt="" style="margin-left: 15px;" width="130" height="50"><br> The Primer Bank</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation"><span
+        class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+
+                <!-- <li ngbDropdownItem class="nav-item"><a class="nav-link" href="#">Accounts</a></li>
+                <li ngbDropdownItem class="nav-item"><a class="nav-link" href="#">Loans</a></li>
+                <li ngbDropdownItem class="nav-item"><a class="nav-link" href="#">Cards</a></li> -->
+
+                <!-- Accounts Type -->
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Account</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <!-- <button ngbDropdownItem>Something else is here</button> -->
+                        <button ngbDropdownItem><a routerLink="saving-account" routerLinkActive="active" class="nav-link">Saving
+                Account</a></button>
+                        <button ngbDropdownItem><a routerLink="current-account" routerLinkActive="active" class="nav-link">Current
+                Account</a></button>
+                    </div>
+                </div>
+
+                <!-- Loans -->
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Loans</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <!-- <button ngbDropdownItem>Something else is here</button> -->
+                        <button ngbDropdownItem><a routerLink="home-loan" routerLinkActive="active" class="nav-link">Home
+                Loan</a></button>
+                        <button ngbDropdownItem><a routerLink="car-loan" routerLinkActive="active" class="nav-link">Car
+                Loan</a></button>
+                        <button ngbDropdownItem><a routerLink="personal-loan" routerLinkActive="active" class="nav-link">Personal
+                Loan</a></button>
+
+                    </div>
+                </div>
+                <!-- Cards -->
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Cards</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <!-- <button ngbDropdownItem>Something else is here</button> -->
+                        <button ngbDropdownItem><a routerLink="rupay-card" routerLinkActive="active" class="nav-link">Rupay
+                Cards</a></button>
+                        <button ngbDropdownItem><a routerLink="visa-card" routerLinkActive="active" class="nav-link">Visa
+                Cards</a></button>
+                        <button ngbDropdownItem><a routerLink="master-card" routerLinkActive="active" class="nav-link">Master
+                Cards</a></button>
+
+                    </div>
+                </div>
+
+            </ul>
+            <span class="navbar-text">
+        <!-- <form class="form-inline"><input class="form-control mr-sm-2" type="search" placeholder="Search"
+            aria-label="Search"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+
+        <div class="nav-item active nav-home-btn home-btn"><a class="nav-link" href="app.component.html">Home <span
+              class="sr-only">(current)</span></a>
+        </div>
+
+        </span>
+        </div>
+
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav" style="padding-bottom:20px;"><a class="nav-item nav-link active" href="#">Home <span
+              class="sr-only">(current)</span></a><a class="nav-item nav-link" href="#">Account</a><a class="nav-item nav-link" href="#">Loans</a><a class="nav-item nav-link disabled" href="#">Cards</a>
+                </div> -->
+
+
+
+
+        <!-- </nav>
+    </div> -->
+    </nav>
+
+
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner ">
+            <div class="carousel-item active"><img class="d-block w-100 carousal-img" src="../assets/Images/first-slide.jpg" alt="First slide"></div>
+            <div class="carousel-item"><img class="d-block w-100 carousal-img" src="../assets/Images/second-slide.jpg" alt="Second slide"></div>
+            <div class="carousel-item"><img class="d-block w-100 carousal-img" src="../assets/Images/third-slide.jpg" alt="Third slide"></div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a routerLink="employees" routerLinkActive="active" class="nav-link">View Inquiries  </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="create-employee" routerLinkActive="active" class="nav-link">inquiry</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="container ">
+        <router-outlet></router-outlet>
+    </div>
+
+
+    <div style="padding-top: 50px;">
+        <p style="text-align: center;">
+            Premier Bank Limited is an Indian financial services company with its registered office in Bangladesh, Gujarat, and corporate office in Mumbai, Maharashtra. It offers a wide range of banking products and financial services for corporate and retail customers
+            through a variety of delivery channels and specialized subsidiaries in the areas of investment banking, life, non-life insurance, venture capital and asset management. The bank has a network of 5,275 branches and 15,589 ATMs across India and
+            has a presence in 17 countries.
+        </p>
+
+        <p style="text-align: center;">The bank has subsidiaries in the United Kingdom and Canada; branches in United States, Singapore, Bahrain, Hong Kong, Qatar, Oman, Dubai International Finance Centre, China and South Africa; as well as representative offices in United Arab Emirates,
+            Bangladesh, Malaysia and Indonesia. The company's UK subsidiary has also established branches in Belgium and Germany</p>
+
+    </div>
+
+</body>
+
+<footer>
+
+    <div id="footer-info ">
+        <p>Copyright 2014 @theprimerbank. All rights reserved.</p>
+        <p><a href="# ">Terms of Service</a> I <a href="# ">Privacy</a></p>
+    </div>
+
+
+</footer>
+
+</html>
