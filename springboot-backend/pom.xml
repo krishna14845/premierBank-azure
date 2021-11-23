@@ -28,7 +28,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		    <dependencies>
+		   
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
