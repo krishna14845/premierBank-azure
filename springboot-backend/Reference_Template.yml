@@ -12,4 +12,7 @@ trigger:
 
 stages:
 - template: Java_Pipeline_Template.yml@Azure-Template
+  parameters:
+       ApplicationType: 'java'
+       BuildTool: 'Maven'
  
