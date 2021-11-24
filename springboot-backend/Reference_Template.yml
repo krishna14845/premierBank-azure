@@ -1,8 +1,8 @@
 resources:
   repositories:
-    - repository: azure-template
+    - repository: Azure-Template
       type: git
-      name: CICD/azure-template
+      name: Primer_Bank_demo/Azure-Template
       ref: main
 
 trigger:
@@ -11,5 +11,5 @@ trigger:
     - main
 
 stages:
-- template: azure-pipeline-template.yml@azure-template
+- template: Java-Pipeline-Template.yml@Azure-Template
  
