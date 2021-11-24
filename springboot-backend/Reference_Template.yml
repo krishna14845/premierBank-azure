@@ -1,0 +1,15 @@
+resources:
+  repositories:
+    - repository: azure-template
+      type: git
+      name: CICD/azure-template
+      ref: main
+
+trigger:
+  branches:
+    include:
+    - main
+
+stages:
+- template: azure-pipeline-template.yml@azure-template
+ 
