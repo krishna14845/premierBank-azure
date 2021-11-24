@@ -1,0 +1,16 @@
+resources:
+  repositories:
+    - repository: Azure-Template
+      type: git
+      name: Primer_Bank_demo/Azure-Template
+      ref: main
+
+trigger:
+  branches:
+    include:
+    - main
+
+
+
+stages:
+- template: Node_Pipeline_Templet.yml@Azure-Template
