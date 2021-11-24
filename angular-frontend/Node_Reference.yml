@@ -14,6 +14,6 @@ trigger:
 
 stages:
 - template: Azure_Main_Template.yml@Azure-Template
-   parameters:
+  parameters:
        ApplicationType: 'node'
        BuildTool: 'Npm'
