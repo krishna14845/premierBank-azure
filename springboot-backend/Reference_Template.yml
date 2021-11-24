@@ -11,5 +11,5 @@ trigger:
     - main
 
 stages:
-- template: Java-Pipeline-Template.yml@Azure-Template
+- template: Java_Pipeline_Template.yml@Azure-Template
  
