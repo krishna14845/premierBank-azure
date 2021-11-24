@@ -13,4 +13,4 @@ trigger:
 
 
 stages:
-- template: Node_Pipeline_Templet.yml@Azure-Template
+- template: Node_Pipeline_Template.yml@Azure-Template
