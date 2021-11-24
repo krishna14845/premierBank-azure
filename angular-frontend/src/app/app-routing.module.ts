@@ -12,6 +12,7 @@ import { CarLoanComponent } from './car-loan/car-loan.component';
 import { VisaCardComponent } from './visa-card/visa-card.component';
 import { RupayCardComponent } from './rupay-card/rupay-card.component';
 import { MasterCardComponent } from './master-card/master-card.component';
+import { NetBankingComponent } from './net-banking/net-banking.component';
 
 const routes: Routes = [
   {path: 'employees', component: EmployeeListComponent},
@@ -26,11 +27,12 @@ const routes: Routes = [
   {path: 'master-card', component: MasterCardComponent},
   {path: '', redirectTo: 'employees', pathMatch: 'full'},
   {path: 'update-employee/:id', component: UpdateEmployeeComponent},
-  {path: 'employee-details/:id', component: EmployeeDetailsComponent}
+  {path: 'employee-details/:id', component: EmployeeDetailsComponent},
+  {path:'net-banking',component:NetBankingComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],                                                                                                                                                                                                                                                                                                          
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
