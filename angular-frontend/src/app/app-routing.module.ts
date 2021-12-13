@@ -31,7 +31,7 @@ const routes: Routes = [
   {path: 'employee-details/:id', component: EmployeeDetailsComponent},
   {path:'net-banking',component:NetBankingComponent},
   {path:'saving-account/create-employee',component:CreateEmployeeComponent},
-  {path:'/success',component:SuccessComponent}
+  {path:'success',component:SuccessComponent}
 ];
 
 @NgModule({
