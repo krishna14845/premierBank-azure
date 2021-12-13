@@ -13,6 +13,7 @@ import { VisaCardComponent } from './visa-card/visa-card.component';
 import { RupayCardComponent } from './rupay-card/rupay-card.component';
 import { MasterCardComponent } from './master-card/master-card.component';
 import { NetBankingComponent } from './net-banking/net-banking.component';
+import { SuccessComponent } from './success/success.component';
 
 const routes: Routes = [
   {path: 'employees', component: EmployeeListComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path: 'update-employee/:id', component: UpdateEmployeeComponent},
   {path: 'employee-details/:id', component: EmployeeDetailsComponent},
   {path:'net-banking',component:NetBankingComponent},
-  {path:'saving-account/create-employee',component:CreateEmployeeComponent}
+  {path:'saving-account/create-employee',component:CreateEmployeeComponent},
+  {path:'/success',component:SuccessComponent}
 ];
 
 @NgModule({

@@ -18,6 +18,7 @@ import { RupayCardComponent } from './rupay-card/rupay-card.component';
 import { VisaCardComponent } from './visa-card/visa-card.component';
 import { MasterCardComponent } from './master-card/master-card.component';
 import { NetBankingComponent } from './net-banking/net-banking.component';
+import { SuccessComponent } from './success/success.component';
 
 
 
@@ -36,7 +37,8 @@ import { NetBankingComponent } from './net-banking/net-banking.component';
     RupayCardComponent,
     VisaCardComponent,
     MasterCardComponent,
-    NetBankingComponent
+    NetBankingComponent,
+    SuccessComponent
 
   ],
   imports: [
