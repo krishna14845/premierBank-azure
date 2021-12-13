@@ -23,6 +23,8 @@ import net.javaguides.springboot.repository.EmployeeRepository;
 @CrossOrigin(origins = "http://web-app-front.azurewebsites.net")
 @RestController
 @RequestMapping("/api/v1/")
+
+
 public class EmployeeController {
 
 	@Autowired
