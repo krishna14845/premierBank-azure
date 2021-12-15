@@ -1,0 +1,48 @@
+trigger:
+- devlopment
+
+stages:
+
+
+
+  - stage: DeployArm
+    variables:
+         - group: 'YAML-Release-Arm'
+    jobs:
+      - deployment:
+        pool:
+          name: Azure Pipelines
+        environment: 'Arm'
+        strategy:
+         runOnce:
+           deploy:
+             steps:
+               - task: replacetokens@3
+                 displayName: 'Replace tokens in azuredeploy.parameters.json'
+                 inputs:
+                    rootDirectory: '/home/vsts/work/1/drop/ARMTemplate'
+                    targetFiles: 'azuredeploy.parameters.json'
+                    tokenPrefix: '#'
+                    tokenSuffix: '#'
+                  
+               - task: AzureResourceManagerTemplateDeployment@3
+                 displayName: 'ARM Template deployment: Resource Group scope'
+                 inputs:
+                    azureResourceManagerConnection: SPNSubscription20e84
+                    subscriptionId: 'fb5eefd5-9b03-48bd-a8c6-47ea6f020e84'
+                    resourceGroupName: '$(arm_appBaseName)'
+                    location: 'Central India'
+                    csmFile: '/home/vsts/work/1/drop/ARMTemplate/azuredeploy.json'
+                    csmParametersFile: '/home/vsts/work/1/drop/ARMTemplate/azuredeploy.parameters.json'
+
+                  
+               
+                
+
+               - task: AzureRmWebAppDeployment@4
+                 displayName: 'Deploy Azure App Service'
+                 inputs:
+                    azureSubscription: 'SPNSubscription20e84'
+                    appType: 'webApp'
+                    WebAppName: '$(arm_appBaseName)'
+                    packageForLinux: '/home/vsts/work/1/drop/springboot-backend/target'
