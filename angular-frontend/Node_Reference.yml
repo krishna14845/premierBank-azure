@@ -17,4 +17,4 @@ stages:
   parameters:
        ApplicationType: 'node'
        BuildTool: 'Npm'
-       Deploy: 'Azure-App-Service'
+       Deploy: 'ARM'
