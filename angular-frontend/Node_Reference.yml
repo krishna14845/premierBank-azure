@@ -15,9 +15,9 @@ trigger:
 stages:
 - template: Azure_Main_Template.yml@Azure-Template
   parameters:
-       ApplicationType: 'java'
-       BuildTool: 'Maven'
+       ApplicationType: 'node'
+       BuildTool: 'Npm'
        CodeAnalysis: 'Sonarqube' 
-       Deploy: 'Java-App-Service'
+       Deploy: 'Azure-App-Service'
        Test: 'Owasp'
         
