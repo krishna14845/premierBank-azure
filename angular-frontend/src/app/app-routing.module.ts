@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'visa-card', component: VisaCardComponent},
   {path: 'rupay-card', component: RupayCardComponent},
   {path: 'master-card', component: MasterCardComponent},
-  {path: '', component:AppComponent},
+  // {path: '', component:AppComponent},
   {path: 'update-employee/:id', component: UpdateEmployeeComponent},
   {path: 'employee-details/:id', component: EmployeeDetailsComponent},
   {path:'net-banking',component:NetBankingComponent},
