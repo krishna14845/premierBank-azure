@@ -14,9 +14,14 @@ stages:
 - template: Azure_Main_Template.yml@Azure-Template
   parameters:
        ApplicationType: 'java'
-       BuildTool: 'Maven'
-       CodeAnalysis: 'Sonarqube' 
-       Deploy: 'Java-App-Service'
-       Test: 'Owasp'
-        
+       BuildTool: 'Maven'  # Maven / Gradel
+       CodeAnalysis: 'Sonarqube' #we can use Jacoco, Cubertura
+       Deploy: 'Java-App-Service' #We can deploy as UAT,ARM,Java-App-Service
+       SecurityTest: 'Owasp' #we can use 
+      #  FunctionalTest:
+      #  IntegrationTest:
+      # JUnitTest:
+
+
+
  
