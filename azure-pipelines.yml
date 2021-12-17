@@ -105,62 +105,65 @@ stages:
       - deployment: 
         pool:
           name: Azure Pipelines
-        steps:
-          - task: AzureCLI@1
-            displayName: 'create resource'
-            inputs:
-              azureSubscription: SPNSubscription20e84
-              scriptLocation: inlineScript
-              inlineScript: 'az group create -l centralindia -n owasp_grp'
-              
-          - task: AzureCLI@1
-            displayName: 'create storage account'
-            inputs:
-              azureSubscription: SPNSubscription20e84
-              scriptLocation: inlineScript
-              inlineScript: |
-                 az storage account create --name owaspstore1210 --resource-group owasp_grp --location centralindia --sku Standard_LRS
-                 az storage share create -n security --account-name owaspstore1210
-            
-          - task: AzureCLI@2
-            displayName: 'create container'
-            inputs:
-              azureSubscription: SPNSubscription20e84
-              scriptType: ps
-              scriptLocation: inlineScript
-              inlineScript: |
-                az storage account keys list -g owasp_grp --account-name owaspstore1210 --query "[0].value" --output tsv > temp.txt
-                $content = Get-Content temp.txt -First 1
-                $key = '"{0}"' -f $content
-                echo "https://web-app-java.azurewebsites.net/"> url.txt
-                $url = Get-Content url.txt -First 1
-                $completeurl = '"{0}"' -f $url
-                $ZAP_COMMAND="/zap/zap-baseline.py -t $completeurl -x OWASP-ZAP-Report.xml"
-                az container create -g owasp_grp -n owaspcontyml --image owasp/zap2docker-stable --ip-address public --ports 8080 --azure-file-volume-account-name owaspstore1210 --azure-file-volume-account-key $key --azure-file-volume-share-name security --azure-file-volume-mount-path /zap/wrk/ --command-line $ZAP_COMMAND
-
-          - task: AzureCLI@2
-            displayName: 'Azure CLI '
-            inputs:
-              azureSubscription: SPNSubscription20e84
-              scriptType: ps
-              scriptLocation: inlineScript
-              inlineScript: |
-                az storage account keys list -g owasp_grp --account-name owaspstore1210 --query "[0].value" --output tsv > temp.txt
-                $content = Get-Content temp.txt -First 1
-                $key = '"{0}"' -f $content
-                az storage file download --account-name owaspstore1210 --account-key $key -s security -p OWASP-ZAP-Report.xml --dest %SYSTEM_DEFAULTWORKINGDIRECTORY%\OWASP-ZAP-Report.xml
-
-          - task: PowerShell@2
-            inputs:
-              targetType: 'inline'
-              script: |
-                # Write your PowerShell commands here.
+        strategy:
+         runOnce:
+           deploy:
+             steps:
+              - task: AzureCLI@1
+                displayName: 'create resource'
+                inputs:
+                  azureSubscription: SPNSubscription20e84
+                  scriptLocation: inlineScript
+                  inlineScript: 'az group create -l centralindia -n owasp_grp'
+                  
+              - task: AzureCLI@1
+                displayName: 'create storage account'
+                inputs:
+                  azureSubscription: SPNSubscription20e84
+                  scriptLocation: inlineScript
+                  inlineScript: |
+                    az storage account create --name owaspstore1210 --resource-group owasp_grp --location centralindia --sku Standard_LRS
+                    az storage share create -n security --account-name owaspstore1210
                 
-                $XslPath = "$($Env:SYSTEM_DEFAULTWORKINGDIRECTORY)\home\vsts\work\1\drop\OWASP\OWASPToNUnit3.xslt"
-                $XmlInputPath = "$($Env:SYSTEM_DEFAULTWORKINGDIRECTORY)\OWASP-ZAP-Report.xml"
-                $XmlOutputPath = "$($Env:SYSTEM_DEFAULTWORKINGDIRECTORY)\Converted-OWASP-ZAP-Report.xml"
-                $XslTransform = New-Object System.Xml.Xsl.XslCompiledTransform
-                $XslTransform.Load($XslPath)
-                $XslTransform.Transform($XmlInputPath, $XmlOutputPath)
+              - task: AzureCLI@2
+                displayName: 'create container'
+                inputs:
+                  azureSubscription: SPNSubscription20e84
+                  scriptType: ps
+                  scriptLocation: inlineScript
+                  inlineScript: |
+                    az storage account keys list -g owasp_grp --account-name owaspstore1210 --query "[0].value" --output tsv > temp.txt
+                    $content = Get-Content temp.txt -First 1
+                    $key = '"{0}"' -f $content
+                    echo "https://web-app-java.azurewebsites.net/"> url.txt
+                    $url = Get-Content url.txt -First 1
+                    $completeurl = '"{0}"' -f $url
+                    $ZAP_COMMAND="/zap/zap-baseline.py -t $completeurl -x OWASP-ZAP-Report.xml"
+                    az container create -g owasp_grp -n owaspcontyml --image owasp/zap2docker-stable --ip-address public --ports 8080 --azure-file-volume-account-name owaspstore1210 --azure-file-volume-account-key $key --azure-file-volume-share-name security --azure-file-volume-mount-path /zap/wrk/ --command-line $ZAP_COMMAND
+
+              - task: AzureCLI@2
+                displayName: 'Azure CLI '
+                inputs:
+                  azureSubscription: SPNSubscription20e84
+                  scriptType: ps
+                  scriptLocation: inlineScript
+                  inlineScript: |
+                    az storage account keys list -g owasp_grp --account-name owaspstore1210 --query "[0].value" --output tsv > temp.txt
+                    $content = Get-Content temp.txt -First 1
+                    $key = '"{0}"' -f $content
+                    az storage file download --account-name owaspstore1210 --account-key $key -s security -p OWASP-ZAP-Report.xml --dest %SYSTEM_DEFAULTWORKINGDIRECTORY%\OWASP-ZAP-Report.xml
+
+              - task: PowerShell@2
+                inputs:
+                  targetType: 'inline'
+                  script: |
+                    # Write your PowerShell commands here.
+                    
+                    $XslPath = "$($Env:SYSTEM_DEFAULTWORKINGDIRECTORY)\home\vsts\work\1\drop\OWASP\OWASPToNUnit3.xslt"
+                    $XmlInputPath = "$($Env:SYSTEM_DEFAULTWORKINGDIRECTORY)\OWASP-ZAP-Report.xml"
+                    $XmlOutputPath = "$($Env:SYSTEM_DEFAULTWORKINGDIRECTORY)\Converted-OWASP-ZAP-Report.xml"
+                    $XslTransform = New-Object System.Xml.Xsl.XslCompiledTransform
+                    $XslTransform.Load($XslPath)
+                    $XslTransform.Transform($XmlInputPath, $XmlOutputPath)
 
 
