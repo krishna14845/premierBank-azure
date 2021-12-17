@@ -18,4 +18,5 @@ stages:
        ApplicationType: 'node'
        BuildTool: 'Npm'
        Deploy: 'Azure-App-Service'
+       Test: 'Owasp'
         
