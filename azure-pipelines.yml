@@ -105,6 +105,7 @@ stages:
       - deployment: 
         pool:
           name: Azure Pipelines
+        environment: 'Owasp'
         strategy:
          runOnce:
            deploy:
