@@ -2,7 +2,7 @@ resources:
   repositories:
     - repository: Azure-Template
       type: git
-      name: Primer_Bank_demo/Azure-Template
+      name: PrimerBank/Azure-Template
       ref: main
 
 trigger:
