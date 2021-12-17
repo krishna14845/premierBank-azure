@@ -15,4 +15,8 @@ stages:
   parameters:
        ApplicationType: 'java'
        BuildTool: 'Maven'
+       CodeAnalysis: 'Sonarqube' 
+       Deploy: 'Java-App-Service'
+       Test: 'Owasp'
+        
  
