@@ -1,0 +1,166 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- devlopment
+
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildWebApp
+        pool:
+          vmImage: "windows-latest"
+          name: Azure Pipelines
+          demands: npm
+
+        steps:
+        - task: Npm@1
+          displayName: 'npm install'
+          inputs:
+            workingDir: 'angular-frontend'
+            verbose: false
+
+        - task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@5
+          displayName: 'Prepare analysis on SonarQube'
+          inputs:
+            SonarQube: PremierBankPOC
+            scannerMode: CLI
+            configFile: 'angular-frontend/sonar-project.properties'
+          enabled: false
+
+        - task: Npm@1
+          displayName: 'npm custom'
+          inputs:
+            command: custom
+            workingDir: 'angular-frontend'
+            verbose: false
+            customCommand: 'run build-prod'
+
+        - task: Npm@1
+          displayName: 'npm test'
+          inputs:
+            command: custom
+            workingDir: 'angular-frontend'
+            verbose: false
+            customCommand: test
+
+        - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@5
+          displayName: 'Run Code Analysis'
+          enabled: false
+
+        - task: SonarSource.sonarqube.291ed61f-1ee4-45d3-b1b0-bf822d9095ef.SonarQubePublish@5
+          displayName: 'Publish Quality Gate Result'
+          enabled: false
+
+        - task: CopyFiles@2
+          displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+          inputs:
+            SourceFolder: 'angular-frontend\dist'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+        - task: CopyFiles@2
+          displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)/OWASP'
+          inputs:
+            SourceFolder: 'angular-frontend/OWASP'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)/OWASP'
+
+        - task: CopyFiles@2
+          displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)/terraform'
+          inputs:
+            SourceFolder: 'angular-frontend/terraform'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)/terraform'
+
+        - task: CopyFiles@2
+          displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)/AzureTmplate'
+          inputs:
+            SourceFolder: 'angular-frontend/AzureTemplate'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)/AzureTmplate'
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact: drop'
+      
+  - stage: DeployDev
+    jobs:
+      - deployment: 
+        pool:
+          vmImage: "windows-latest"
+          name: Azure Pipelines
+        environment: 'FrontDev'
+        strategy:
+         runOnce:
+           deploy:
+            steps:
+            - task: AzureRmWebAppDeployment@4
+              displayName: 'Deploy Azure App Service'
+              inputs:
+                azureSubscription: 'SPNSubscription20e84'
+                appType: 'webApp'
+                WebAppName: 'web-app-front'
+                packageForLinux: 'D:\a\1\drop\angular-frontend'
+
+  - stage: Owasp
+    jobs:
+      - deployment: 
+        pool:
+          name: Azure Pipelines
+        steps:
+          - task: AzureCLI@1
+            displayName: 'create resource'
+            inputs:
+              azureSubscription: SPNSubscription20e84
+              scriptLocation: inlineScript
+              inlineScript: 'az group create -l centralindia -n owasp_grp'
+              
+          - task: AzureCLI@1
+            displayName: 'create storage account'
+            inputs:
+              azureSubscription: SPNSubscription20e84
+              scriptLocation: inlineScript
+              inlineScript: |
+                 az storage account create --name owaspstore1210 --resource-group owasp_grp --location centralindia --sku Standard_LRS
+                 az storage share create -n security --account-name owaspstore1210
+            
+          - task: AzureCLI@2
+            displayName: 'create container'
+            inputs:
+              azureSubscription: SPNSubscription20e84
+              scriptType: ps
+              scriptLocation: inlineScript
+              inlineScript: |
+                az storage account keys list -g owasp_grp --account-name owaspstore1210 --query "[0].value" --output tsv > temp.txt
+                $content = Get-Content temp.txt -First 1
+                $key = '"{0}"' -f $content
+                echo "https://web-app-java.azurewebsites.net/"> url.txt
+                $url = Get-Content url.txt -First 1
+                $completeurl = '"{0}"' -f $url
+                $ZAP_COMMAND="/zap/zap-baseline.py -t $completeurl -x OWASP-ZAP-Report.xml"
+                az container create -g owasp_grp -n owaspcontyml --image owasp/zap2docker-stable --ip-address public --ports 8080 --azure-file-volume-account-name owaspstore1210 --azure-file-volume-account-key $key --azure-file-volume-share-name security --azure-file-volume-mount-path /zap/wrk/ --command-line $ZAP_COMMAND
+
+          - task: AzureCLI@2
+            displayName: 'Azure CLI '
+            inputs:
+              azureSubscription: SPNSubscription20e84
+              scriptType: ps
+              scriptLocation: inlineScript
+              inlineScript: |
+                az storage account keys list -g owasp_grp --account-name owaspstore1210 --query "[0].value" --output tsv > temp.txt
+                $content = Get-Content temp.txt -First 1
+                $key = '"{0}"' -f $content
+                az storage file download --account-name owaspstore1210 --account-key $key -s security -p OWASP-ZAP-Report.xml --dest %SYSTEM_DEFAULTWORKINGDIRECTORY%\OWASP-ZAP-Report.xml
+
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Write your PowerShell commands here.
+                
+                $XslPath = "$($Env:SYSTEM_DEFAULTWORKINGDIRECTORY)\home\vsts\work\1\drop\OWASP\OWASPToNUnit3.xslt"
+                $XmlInputPath = "$($Env:SYSTEM_DEFAULTWORKINGDIRECTORY)\OWASP-ZAP-Report.xml"
+                $XmlOutputPath = "$($Env:SYSTEM_DEFAULTWORKINGDIRECTORY)\Converted-OWASP-ZAP-Report.xml"
+                $XslTransform = New-Object System.Xml.Xsl.XslCompiledTransform
+                $XslTransform.Load($XslPath)
+                $XslTransform.Transform($XmlInputPath, $XmlOutputPath)
+
+
