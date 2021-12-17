@@ -18,6 +18,6 @@ stages:
        ApplicationType: 'java'
        BuildTool: 'Maven'
        CodeAnalysis: 'Sonarqube' 
-       Deploy: 'Azure-App-Service'
+       Deploy: 'Java-App-Service'
        Test: 'Owasp'
         
