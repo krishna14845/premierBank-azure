@@ -17,4 +17,5 @@ stages:
   parameters:
        ApplicationType: 'node'
        BuildTool: 'Npm'
-       Deploy: 'ARM'
+       Deploy: 'UAT'
+        
