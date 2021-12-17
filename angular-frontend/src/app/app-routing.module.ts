@@ -14,6 +14,7 @@ import { RupayCardComponent } from './rupay-card/rupay-card.component';
 import { MasterCardComponent } from './master-card/master-card.component';
 import { NetBankingComponent } from './net-banking/net-banking.component';
 import { SuccessComponent } from './success/success.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {path: 'employees', component: EmployeeListComponent},
@@ -26,7 +27,7 @@ const routes: Routes = [
   {path: 'visa-card', component: VisaCardComponent},
   {path: 'rupay-card', component: RupayCardComponent},
   {path: 'master-card', component: MasterCardComponent},
-  {path: '', redirectTo: 'employees', pathMatch: 'full'},
+  {path: '', component:AppComponent},
   {path: 'update-employee/:id', component: UpdateEmployeeComponent},
   {path: 'employee-details/:id', component: EmployeeDetailsComponent},
   {path:'net-banking',component:NetBankingComponent},
