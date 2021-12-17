@@ -35,10 +35,3 @@ resource "azurerm_app_service" "dev" {
   resource_group_name  = "${azurerm_resource_group.dev.name}"
   app_service_plan_id  = "${azurerm_app_service_plan.dev.id}"
 }
-
-resource "azurerm_app_service_slot" "dev" {
-  name                 = "__slotAppServiceSlotOne__"
-  location             = "${azurerm_resource_group.dev.location}"
-  resource_group_name  = "${azurerm_resource_group.dev.name}"
-  app_service_plan_id  = "${azurerm_app_service_plan.dev.id}"
-  app_service_name     = "${azurerm_app_service.dev.name}"
