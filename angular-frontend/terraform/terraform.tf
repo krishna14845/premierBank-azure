@@ -13,12 +13,12 @@ version = "=2.0.0"
  features{}
 }
 
-resource "azurerm_resource_group" "dev" {
+resource "azurerm_resource_group" "uat" {
   name     = "__rgTerraform__"
   location = "central india"
 }
 
-resource "azurerm_app_service_plan" "dev" {
+resource "azurerm_app_service_plan" "uat" {
   name                = "__appserviceplan__"
   location            = "${azurerm_resource_group.dev.location}"
   resource_group_name = "${azurerm_resource_group.dev.name}"
@@ -29,7 +29,7 @@ resource "azurerm_app_service_plan" "dev" {
   }
 }
 
-resource "azurerm_app_service" "dev" {
+resource "azurerm_app_service" "uat" {
   name                 = "__appservicename__"
   location             = "${azurerm_resource_group.dev.location}"
   resource_group_name  = "${azurerm_resource_group.dev.name}"
