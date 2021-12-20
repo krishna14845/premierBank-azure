@@ -13,15 +13,15 @@ version = "=2.0.0"
  features{}
 }
 
-resource "azurerm_resource_group" "dev" {
+resource "azurerm_resource_group" "uat" {
   name     = "__rgTerraform__"
   location = "central india"
 }
 
-resource "azurerm_app_service_plan" "dev" {
+resource "azurerm_app_service_plan" "uat" {
   name                = "__appserviceplan__"
-  location            = "${azurerm_resource_group.dev.location}"
-  resource_group_name = "${azurerm_resource_group.dev.name}"
+  location            = "${azurerm_resource_group.uat.location}"
+  resource_group_name = "${azurerm_resource_group.uat.name}"
 
   sku {
      tier = "Standard"
@@ -29,16 +29,9 @@ resource "azurerm_app_service_plan" "dev" {
   }
 }
 
-resource "azurerm_app_service" "dev" {
+resource "azurerm_app_service" "uat" {
   name                 = "__appservicename__"
-  location             = "${azurerm_resource_group.dev.location}"
-  resource_group_name  = "${azurerm_resource_group.dev.name}"
-  app_service_plan_id  = "${azurerm_app_service_plan.dev.id}"
+  location             = "${azurerm_resource_group.uat.location}"
+  resource_group_name  = "${azurerm_resource_group.uat.name}"
+  app_service_plan_id  = "${azurerm_app_service_plan.uat.id}"
 }
-
-resource "azurerm_app_service_slot" "dev" {
-  name                 = "__slotAppServiceSlotOne__"
-  location             = "${azurerm_resource_group.dev.location}"
-  resource_group_name  = "${azurerm_resource_group.dev.name}"
-  app_service_plan_id  = "${azurerm_app_service_plan.dev.id}"
-  app_service_name     = "${azurerm_app_service.dev.name}"
