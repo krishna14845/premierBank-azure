@@ -1,0 +1,28 @@
+resources:
+  repositories:
+    - repository: Azure-Template
+      type: git
+      name: PremierBankPOC/Azure-Template
+      ref: main
+
+trigger:
+  branches:
+    include:
+    - main
+
+stages:
+- template: Azure_Main_Template.yml@Azure-Template
+  parameters:
+       ApplicationType: 'java'
+       BuildTool: 'Maven'  # Maven / Gradel
+       CodeAnalysis: 'Sonarqube' #we can use Jacoco, Cubertura
+       Deploy: 'Java-App-Service' #We can deploy as UAT,ARM,Java-App-Service
+       SecurityTest: 'Owasp' #we can use 
+       FunctionalTest: 'UFT' #we can use TricentisTosca,SauceLabs
+       IntegrationTest: 'DBUnit'#we can use Greenmail,JMockit1
+       JUnitTest: 'JMockit'#we can use  NUnit, Emma
+      #  LoadTest:
+      #  NonFunctionalTest:
+      #  PerformanceTest:
+      #  RegressionTest:
+      #  SanityTest:
