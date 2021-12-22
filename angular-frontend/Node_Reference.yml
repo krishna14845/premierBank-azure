@@ -5,11 +5,6 @@ resources:
       name: PremierBank/Azure-Template
       ref: main
 
-trigger:
-  branches:
-    include:
-    - main
-
 
 
 stages:
