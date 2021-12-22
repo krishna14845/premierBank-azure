@@ -16,7 +16,7 @@ stages:
        ApplicationType: 'java'
        BuildTool: 'Maven'  # Maven / Gradel
        CodeAnalysis: 'Sonarqube' #we can use Jacoco, Cubertura
-       Deploy: 'Java_UAT' #We can deploy as UAT,ARM,Java-App-Service
+       Deploy: 'Java_ARM' #We can deploy as UAT,ARM,Java-App-Service
        SecurityTest: 'Owasp' #we can use 
        FunctionalTest: 'UFT' #we can use TricentisTosca,SauceLabs
        IntegrationTest: 'DBUnit'#we can use Greenmail,JMockit1
