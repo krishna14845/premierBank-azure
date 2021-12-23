@@ -48,6 +48,16 @@ public class Employee {
 		this.address = address;
 		this.accountId = accountId;
 	}
+	public Employee( String firstName, String lastName, String emailId, String contact, String address,
+			String accountId) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+		this.contact = contact;
+		this.address = address;
+		this.accountId = accountId;
+	}
 
 	public long getId() {
 		return id;
