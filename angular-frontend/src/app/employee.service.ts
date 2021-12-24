@@ -8,7 +8,7 @@ import { Employee } from './employee';
 })
 export class EmployeeService {
 
-  private baseURL = "https://web-app-java.azurewebsites.net/api/v1/employees";
+  private baseURL = "https://web-app-backend.azurewebsites.net/api/v1/employees";
 
   constructor(private httpClient: HttpClient) { }
 
