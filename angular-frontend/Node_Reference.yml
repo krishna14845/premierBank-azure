@@ -13,6 +13,6 @@ stages:
        ApplicationType: 'node'
        BuildTool: 'Npm'
        CodeAnalysis: 'Sonarqube' 
-       # Deploy: 'UAT'
+       Deploy: 'Azure-App-Service'
        Test: 'Owasp'
         
