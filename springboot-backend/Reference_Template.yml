@@ -15,5 +15,5 @@ stages:
   parameters:
        ApplicationType: 'java'
        BuildTool: 'Maven'
-       Deploy: 'Java_Terraform'
+       Deploy: 'Java_ARM'
  
