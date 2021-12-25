@@ -13,6 +13,6 @@ stages:
        ApplicationType: 'node'
        BuildTool: 'Npm'
        CodeAnalysis: 'Sonarqube' 
-       Deploy: 'ARM'
+       Deploy: 'Terraform'
        Test: 'Owasp'
         
