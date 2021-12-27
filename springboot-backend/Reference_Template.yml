@@ -1,0 +1,22 @@
+resources:
+  repositories:
+    - repository: Azure-Template
+      type: git
+      name: PremierBank/Azure-Template
+      ref: main
+ 
+trigger:
+  branches:
+    include:
+    - main
+ 
+stages:
+- template: Azure_Main_Template.yml@Azure-Template
+  parameters:
+       ApplicationType: 'java'
+       BuildTool: 'Maven'
+       Deploy: 'Java_ARM' #Java_Terraform , Java-App-Service
+       SecurityTest: 'Owasp' #we can use 
+       FunctionalTest: 'UFT' #we can use TricentisTosca,SauceLabs
+       IntegrationTest: 'DBUnit'#we can use Greenmail,JMockit1
+       JUnitTest: 'JMockit'#we can use  NUnit, Emma
