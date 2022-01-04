@@ -20,7 +20,9 @@ import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.Employee;
 import net.javaguides.springboot.repository.EmployeeRepository;
 
-@CrossOrigin(origins = {"http://web-app-frontend.azurewebsites.net","https://web-app-frontend-slot.azurewebsites.net"})
+@CrossOrigin(origins = {"http://web-app-frontend.azurewebsites.net"
+				// ,"https://web-app-frontend-slot.azurewebsites.net"
+	})
 
 @RestController
 @RequestMapping("/api/v1/")
