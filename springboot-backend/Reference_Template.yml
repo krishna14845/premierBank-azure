@@ -14,7 +14,7 @@ stages:
 - template: Azure_Main_Template.yml@Azure-Template
   parameters:
        ApplicationType: 'java'
-       version: 1.8
+       Version: 1.8
        BuildTool: 'Maven'
        CodeCoverage: 'Sonarqube'
        Deploy: 'Java_Terraform' #Java_Terraform , Java-App-Service
