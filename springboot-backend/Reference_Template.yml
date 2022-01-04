@@ -16,6 +16,7 @@ stages:
        ApplicationType: 'java'
        Version: 11
        BuildTool: 'Maven'
+       name: 'BuildMaven'
        CodeCoverage: 'Sonarqube'
        Deploy: 'Java_Terraform' #Java_Terraform , Java-App-Service
        SecurityTest: 'Owasp' #we can use 
