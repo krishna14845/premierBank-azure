@@ -1,0 +1,18 @@
+resources:
+  repositories:
+    - repository: Azure-Template
+      type: git
+      name: PremierBank/Azure-Template
+      ref: main
+
+
+
+stages:
+- template: Azure_Main_Template.yml@Azure-Template
+  parameters:
+       ApplicationType: 'node'
+       BuildTool: 'Npm'
+       CodeAnalysis: 'Sonarqube' 
+       Deploy: 'Azure-App-Service'
+       Test: 'Owasp'
+        
