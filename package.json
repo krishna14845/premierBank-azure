@@ -50,7 +50,9 @@
     },
     "husky": {
         "hooks": {
-            "pre-push": "CI=true npm test"
+            "scripts ": {
+                "lint": "tsc && eslint \"src/**/*.{js,ts,tsx}\" --quiet --fix"
+            }
         }
     }
 }
