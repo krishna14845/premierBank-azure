@@ -2,7 +2,7 @@ resources:
   repositories:
     - repository: Azure-Template
       type: git
-      name: PremierBankPOC/Azure-Template
+      name: PremierBank/Azure-Template
       ref: main 
 
 trigger:
