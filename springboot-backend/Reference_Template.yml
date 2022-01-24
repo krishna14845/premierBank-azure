@@ -5,15 +5,12 @@ resources:
       name: PremierBank/Azure-Template
       ref: main
 
- 
-
 trigger:
   branches:
     include:
     - main
 
  
-
 stages:
 - template: Azure_Main_Template.yml@Azure-Template
   parameters:
