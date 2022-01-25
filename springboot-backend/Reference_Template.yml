@@ -18,7 +18,7 @@ stages:
        Version: 1.8
        BuildTool: 'Maven'
        CodeCoverage: 'Sonarqube'
-       Deploy: 'Java-App-Service' #Java_Terraform , Java-App-Service
+       Deploy: 'Java_Terraform' #Java_Terraform , Java-App-Service
        SecurityTest: 'OWASP_Java' #we can use 
        FunctionalTest: 'UFT' #we can use TricentisTosca,SauceLabs
        IntegrationTest: 'DBUnit'#we can use Greenmail,JMockit1
