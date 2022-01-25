@@ -46,11 +46,19 @@ stages:
                    tokenSuffix: '__'
 
                - task: CmdLine@2
-                 displayName: 'Run Static Code Analysic for Terraform Using Checkov'
+                 displayName: 'Installing checkov'
                  inputs:
-                   script: 'docker run --tty --volume D:\a\1\drop\terraform:/tf bridgecrew/checkov --directory /tf --compact'
-
-               
+                   script: 'pip3 install checkov'
+                   
+               - task: CmdLine@2
+                 inputs:
+                   script: 'checkov --D:\a\1\drop\terraform  -0 Junitxml > D:\a\1\drop\terraform/result.xml'
+              
+               - task: PublishTestResults@2
+                 inputs:
+                   testResultsFormat: 'JUnit'
+                   testResultsFiles: 'result.xml'
+                   searchFolder: 'D:\a\1\drop\terraform'
 
                - task: TerraformInstaller@0
                  inputs:
