@@ -45,6 +45,11 @@ stages:
                    tokenPrefix: '__'
                    tokenSuffix: '__'
 
+               - task: CmdLine@2
+                 displayName: 'Run Static Code Analysic for Terraform Using Checkov'
+                 inputs:
+                   script: 'docker run --tty --volume D:\a\1\drop\terraform:/tf bridgecrew/checkov --directory /tf --compact'
+
                
 
                - task: TerraformInstaller@0
