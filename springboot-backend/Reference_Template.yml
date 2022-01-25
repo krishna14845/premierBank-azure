@@ -19,7 +19,7 @@ stages:
        BuildTool: 'Maven'
        CodeCoverage: 'Sonarqube'
        Deploy: 'Java-App-Service' #Java_Terraform , Java-App-Service
-       #SecurityTest: 'Owasp' #we can use 
+       SecurityTest: 'Owasp' #we can use 
        FunctionalTest: 'UFT' #we can use TricentisTosca,SauceLabs
        IntegrationTest: 'DBUnit'#we can use Greenmail,JMockit1
        JUnitTest: 'JMockit'#we can use  NUnit, Emma
