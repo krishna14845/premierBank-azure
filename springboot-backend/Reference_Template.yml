@@ -1,0 +1,17 @@
+resources:
+    repositories:
+        -   repository: Azure-Template
+            type: git
+            name: PremierBank/Azure-Template
+            ref: main
+
+stages:
+    - template: Azure_Main_Template.yml@Azure-Template
+      parameters:
+          ApplicationType: 'java'
+          Version: 1.8
+          BuildTool: 'Maven'
+          CodeCoverage: 'Sonarqube'
+          Deploy: 'Java-App-Service' #Terraform, CLI, ARM
+          SecurityTest: 'OWASP_Java' #we can use
+          FunctionalTest: 'UFT' # Dummy Parameter for Func. Testing
