@@ -13,5 +13,5 @@ stages:
          BuildTool: 'Maven'
          CodeCoverage: 'Sonarqube'
          Deploy: 'Java-App-Service'
-         SecurityTest: 'OWASP_Java'
+         SecurityTest: 'Owasp'
          FunctionalTest: 'Test' 
