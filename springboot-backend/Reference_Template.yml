@@ -12,6 +12,6 @@ stages:
          Version: 1.8
          BuildTool: 'Maven'
          CodeCoverage: 'Sonarqube'
-         Deploy: 'Java-App-Service'
+         Deploy: 'Java_Terraform'
          SecurityTest: 'Owasp'
          FunctionalTest: 'Test' 
