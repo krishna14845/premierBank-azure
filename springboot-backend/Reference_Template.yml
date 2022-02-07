@@ -12,7 +12,7 @@ stages:
          Version: 1.8
          BuildTool: 'Maven'
          CodeCoverage: 'Sonarqube'
-         Deploy: 'Java_Terraform'
+         Deploy: 'Java-App-Service'
          SecurityTest: 'Owasp'
          FunctionalTest: 'Test'
          path: 'D:\a\1\drop\springboot-backend\target\springboot-backend-0.0.1-SNAPSHOT.jar' 
