@@ -13,7 +13,7 @@ stages:
        ApplicationType: 'node'
        BuildTool: 'Npm'
        CodeAnalysis: 'Sonarqube' 
-       Deploy: 'ARM'
+       Deploy: 'Terraform'
        path: 'D:\a\1\drop\angular-frontend'
        SecurityTest: 'Owasp'
         
