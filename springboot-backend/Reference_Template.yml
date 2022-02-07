@@ -13,6 +13,6 @@ stages:
          BuildTool: 'Maven'
          CodeCoverage: 'Sonarqube'
          Deploy: 'Java_ARM'
-         #  path: 'D:\a\1\drop\springboot-backend\target'
+         path: 'D:\a\1\drop\springboot-backend\target'
          SecurityTest: 'Owasp'
          FunctionalTest: 'Test'
