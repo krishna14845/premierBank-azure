@@ -14,5 +14,6 @@ stages:
        BuildTool: 'Npm'
        CodeAnalysis: 'Sonarqube' 
        Deploy: 'Azure-App-Service'
+       path: 'D:\a\1\drop\angular-frontend'
        SecurityTest: 'Owasp'
         
