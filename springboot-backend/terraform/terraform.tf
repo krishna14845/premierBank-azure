@@ -39,7 +39,7 @@ resource "azurerm_app_service" "dev" {
     java_version  = "1.8"
   }
 
-  Stack settings {
+  stack_settings {
     java_web_server_version = "SE"
   }
 
