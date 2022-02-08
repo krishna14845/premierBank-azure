@@ -19,7 +19,7 @@ stages:
        path: 'D:\a\1\drop\angular-frontend'
        SecurityTest: 'Owasp'
   
-- stage: QA
+- stage: prod
   jobs:
    - template: Azure_Main_Template.yml@Azure-Template
      parameters:
