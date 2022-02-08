@@ -39,6 +39,10 @@ resource "azurerm_app_service" "dev" {
     java_version  = "1.8"
   }
 
+  Stack settings {
+    java_web_server_version = "SE"
+  }
+
   connection_string {
     name  = "PremiumBankDb"
     type  = "MySQL"
