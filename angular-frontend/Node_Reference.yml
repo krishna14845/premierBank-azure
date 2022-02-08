@@ -8,8 +8,8 @@ resources:
 
 
 stages:
-- stage: Dev
-  jobs:
+# - stage: Dev
+#   jobs:
    - template: Azure_Main_Template.yml@Azure-Template
      parameters:
        ApplicationType: 'node'
