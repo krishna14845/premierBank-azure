@@ -37,7 +37,6 @@ resource "azurerm_app_service" "dev" {
 
   site_config {
     java_version  = "1.8"
-    java_web_server_version = "SE"
   }
 
   connection_string {
