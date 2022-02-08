@@ -34,5 +34,17 @@ resource "azurerm_app_service" "dev" {
   location             = "${azurerm_resource_group.dev.location}"
   resource_group_name  = "${azurerm_resource_group.dev.name}"
   app_service_plan_id  = "${azurerm_app_service_plan.dev.id}"
+
+  site_config {
+    java_version  = "1.8"
+    
+  }
+
+  connection_string {
+    name  = "PremiumBankDb"
+    type  = "MySQL"
+    value = "jdbc:mysql://mysqlserver-backend.mysql.database.azure.com:3306/alm?useSSL=true&requireSSL=false&autoReconnect=true&user=Admin123@mysqlserver-backend&password=admin@123"
+  }
+
 }
 
