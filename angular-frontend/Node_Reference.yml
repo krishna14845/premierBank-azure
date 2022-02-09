@@ -8,7 +8,7 @@ resources:
 
 
 stages:
- - stage: Dev
+ - stage: "Dev"
    jobs:
    - template: Azure_Main_Template.yml@Azure-Template
      parameters:
@@ -19,13 +19,13 @@ stages:
        path: 'D:\a\1\drop\angular-frontend'
        SecurityTest: 'Owasp'
   
- - stage: Uat
+ - stage: "Uat"
    jobs:
    - template: Azure_Main_Template.yml@Azure-Template
      parameters:
        ApplicationType: 'node'
        BuildTool: 'Npm'
        CodeAnalysis: 'Sonarqube' 
-       Deploy: 'Terraform'
-       path: 'D:\a\1\drop\angular-frontend'
-       SecurityTest: 'Owasp'
+      #  Deploy: 'Terraform'
+      #  path: 'D:\a\1\drop\angular-frontend'
+      #  SecurityTest: 'Owasp'
