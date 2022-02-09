@@ -16,4 +16,4 @@ stages:
          Deploy: 'Java-App-Service'
          path: 'D:\a\1\drop\springboot-backend\target'
          SecurityTest: 'Owasp'
-         FunctionalTest: 'Test'
+        #  FunctionalTest: 'Test'
