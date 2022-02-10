@@ -98,9 +98,9 @@ stages:
               - task: AzureRmWebAppDeployment@4
                 inputs:
                   azureSubscription: SPNMastekLabse3097
-                  WebAppName: 'webapp-backend01-Uat'
+                  WebAppName: 'webapp-backend01'
                   deployToSlotOrASE: true
-                  ResourceGroupName: 'Premier_Bank_UAT'
+                  ResourceGroupName: 'Premier_Bank'
                   SlotName: Uat
                   packageForLinux: 'D:\a\1\drop\springboot-backend\target\springboot-backend-0.0.1-SNAPSHOT.jar'
                   # packageForLinux: '${{parameters.path}}'
