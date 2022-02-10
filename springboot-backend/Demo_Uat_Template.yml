@@ -78,9 +78,9 @@ stages:
                 inputs:
                   azureSubscription: SPNMastekLabse3097
                   WebAppName: 'webapp-backend01'
-                  # deployToSlotOrASE: true
+                  deployToSlotOrASE: true
                   ResourceGroupName: 'Premier_Bank'
-                  # SlotName: slot
+                  SlotName: PRODUCTION
                   packageForLinux: 'D:\a\1\drop\springboot-backend\target\springboot-backend-0.0.1-SNAPSHOT.jar'
                   # packageForLinux: '${{parameters.path}}'
 
@@ -99,8 +99,8 @@ stages:
                 inputs:
                   azureSubscription: SPNMastekLabse3097
                   WebAppName: 'webapp-backend01-Uat'
-                  # deployToSlotOrASE: true
+                  deployToSlotOrASE: true
                   ResourceGroupName: 'Premier_Bank_UAT'
-                  # SlotName: slot
+                  SlotName: Uat
                   packageForLinux: 'D:\a\1\drop\springboot-backend\target\springboot-backend-0.0.1-SNAPSHOT.jar'
                   # packageForLinux: '${{parameters.path}}'
