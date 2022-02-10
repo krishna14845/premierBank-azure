@@ -63,6 +63,27 @@ stages:
           condition: succeededOrFailed()
 
 
+  - stage: DeployDev
+    jobs:
+      - deployment: 
+        pool:
+          vmImage: "windows-latest"
+          name: Azure Pipelines
+        environment: 'Dev'
+        strategy:
+         runOnce:
+           deploy:
+             steps:
+              - task: AzureRmWebAppDeployment@4
+                inputs:
+                  azureSubscription: SPNMastekLabse3097
+                  WebAppName: 'webapp-backend01'
+                  # deployToSlotOrASE: true
+                  ResourceGroupName: 'Premier_Bank'
+                  # SlotName: slot
+                  packageForLinux: 'D:\a\1\drop\springboot-backend\target\springboot-backend-0.0.1-SNAPSHOT.jar'
+                  # packageForLinux: '${{parameters.path}}'
+
   - stage: DeployUat
     jobs:
       - deployment: 
