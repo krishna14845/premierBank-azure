@@ -29,3 +29,4 @@ stages:
       #  Deploy: 'Terraform'
       #  path: 'D:\a\1\drop\angular-frontend'
       #  SecurityTest: 'Owasp'
+      #  hello world
