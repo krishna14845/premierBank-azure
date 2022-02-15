@@ -14,10 +14,11 @@ stages:
      parameters:
        ApplicationType: 'node'
        BuildTool: 'Npm'
+       workingDir: 'angular-frontend'
        CodeAnalysis: 'Sonarqube' 
        Deploy: 'Azure-App-Service'
        path: 'D:\a\1\drop\angular-frontend'
-       SecurityTest: 'Owasp'
+       # SecurityTest: 'Owasp'
   
 #  - stage: "Uat"
 #    jobs:
