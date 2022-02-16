@@ -9,11 +9,11 @@ stages:
 
     - template: Azure_Main_Template.yml@Azure-Template
       parameters:
-         ApplicationType: 'java'
-         Version: 1.8
-         BuildTool: 'Maven'
-         CodeCoverage: 'Sonarqube'
-         Deploy: 'Java-App-Service'
+         ApplicationType: 'java'  # .Net,Node 
+         Version: 1.8  # 11
+         BuildTool: 'Maven'  #npm, visual studio Build
+         CodeCoverage: 'Sonarqube'  # sonarcloud
+         Deploy: 'Java-App-Service' #Java_Terraform , Java-App-Service
          path: 'D:\a\1\drop\springboot-backend\target'
-         SecurityTest: 'Owasp'
+         SecurityTest: 'Owasp' #Burp Suite, Veracode
         #  FunctionalTest: 'Test'
