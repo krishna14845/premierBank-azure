@@ -11,7 +11,6 @@ stages:
    - template: Azure_Main_Template.yml@Azure-Template
      parameters:
        ApplicationType: 'node'
-       #  Version: 6.0
        BuildTool: 'Npm'
        workingDir: 'angular-frontend'
        CodeAnalysis: 'Sonarqube' 
