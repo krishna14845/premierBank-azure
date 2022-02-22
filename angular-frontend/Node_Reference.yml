@@ -9,8 +9,8 @@ resources:
 
 # stages:
 extends:
-    template: Azure_Main_Template.yml@Azure-Template
-    parameters:
+     template: Azure_Main_Template.yml@Azure-Template
+     parameters:
        ApplicationType: 'node'
        BuildTool: 'Npm'
        workingDir: 'angular-frontend'
