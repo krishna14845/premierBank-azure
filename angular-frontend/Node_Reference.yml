@@ -7,9 +7,9 @@ resources:
 
 
 
-# stages:
-extends:
-     template: Azure_Main_Template.yml@Azure-Template
+stages:
+   - stage: 'Dev'
+   - template: Azure_Main_Template.yml@Azure-Template
      parameters:
        ApplicationType: 'node'
        BuildTool: 'Npm'
