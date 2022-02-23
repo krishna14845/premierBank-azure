@@ -14,6 +14,7 @@ stages:
     parameters:
        ApplicationType: 'node'
        BuildTool: 'Npm'
+       Version: '4.0'
        workingDir: 'angular-frontend'
        CodeAnalysis: 'Sonarqube' 
        Deploy: 'Azure-App-Service'
