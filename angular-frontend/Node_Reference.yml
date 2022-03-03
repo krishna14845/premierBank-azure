@@ -14,6 +14,7 @@ stages:
        BuildTool: 'Npm'
        Version: '6.0'
        workingDir: 'angular-frontend'
+       BuildCommand: 'run build-prod'
        CodeAnalysis: 'Sonarqube' 
        #  Deploy: 'Terraform'
        #  path: 'D:\a\1\drop\angular-frontend'
