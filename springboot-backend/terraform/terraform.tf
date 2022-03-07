@@ -37,16 +37,17 @@ resource "azurerm_app_service" "dev" {
 
   site_config {
     //  java_version  = "1.8"
-    dotnet_version = "v3.0"
+    //dotnet_version = "v3.0"
+    linux_fx_version = "DOTNETCORE|3.1"
   }
 
 
 
-  connection_string {
-    name  = "PremiumBankDb"
-    type  = "MySQL"
-    value = "jdbc:mysql://mysqlserver-backend.mysql.database.azure.com:3306/alm?useSSL=true&requireSSL=false&autoReconnect=true&user=Admin123@mysqlserver-backend&password=admin@123"
-  }
+  // connection_string {
+  //   name  = "PremiumBankDb"
+  //   type  = "MySQL"
+  //   value = "jdbc:mysql://mysqlserver-backend.mysql.database.azure.com:3306/alm?useSSL=true&requireSSL=false&autoReconnect=true&user=Admin123@mysqlserver-backend&password=admin@123"
+  // }
 
 }
 
