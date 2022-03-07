@@ -37,7 +37,7 @@ resource "azurerm_app_service" "dev" {
 
   site_config {
     //  java_version  = "1.8"
-    dotnet_version = "3.0"
+    dotnet_version = "v3.0"
   }
 
 
