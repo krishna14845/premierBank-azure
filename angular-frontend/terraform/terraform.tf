@@ -28,7 +28,7 @@ resource "azurerm_app_service_plan" "uat" {
      size = "S1"
   }
 
-    site_config {
+  site_config {
     dotnet_version  = "v3.0"
   }
 
