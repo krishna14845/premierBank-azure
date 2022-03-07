@@ -36,7 +36,8 @@ resource "azurerm_app_service" "dev" {
   app_service_plan_id  = "${azurerm_app_service_plan.dev.id}"
 
   site_config {
-    java_version  = "1.8"
+    //  java_version  = "1.8"
+    dotnet_version = "3.0"
   }
 
 
