@@ -38,8 +38,8 @@ resource "azurerm_app_service" "dev" {
   site_config {
     //  java_version  = "1.8"
     //dotnet_version = "v3.0"
-    // linux_fx_version = "DOTNETCORE|3.1"
-    dotnet_core_version = "3.1"
+    windows_fx_version = "DOTNETCORE|3.1"
+    // dotnet_core_version = "3.1"
   }
 
 
