@@ -36,19 +36,19 @@ resource "azurerm_app_service" "dev" {
   app_service_plan_id  = "${azurerm_app_service_plan.dev.id}"
 
   site_config {
-    //  java_version  = "1.8"
+    java_version  = "1.8"
     //dotnet_version = "v3.0"
-    windows_fx_version = "DOTNETCORE|3.1"
+    // windows_fx_version = "DOTNETCORE|3.1"
     // dotnet_core_version = "3.1"
   }
 
 
 
-  // connection_string {
-  //   name  = "PremiumBankDb"
-  //   type  = "MySQL"
-  //   value = "jdbc:mysql://mysqlserver-backend.mysql.database.azure.com:3306/alm?useSSL=true&requireSSL=false&autoReconnect=true&user=Admin123@mysqlserver-backend&password=admin@123"
-  // }
+  connection_string {
+    name  = "PremiumBankDb"
+    type  = "MySQL"
+    value = "jdbc:mysql://mysqlserver-backend.mysql.database.azure.com:3306/alm?useSSL=true&requireSSL=false&autoReconnect=true&user=Admin123@mysqlserver-backend&password=admin@123"
+  }
 
 }
 
