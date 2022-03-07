@@ -27,6 +27,13 @@ resource "azurerm_app_service_plan" "uat" {
      tier = "Standard"
      size = "S1"
   }
+
+  site_config {
+    application_stack {
+        dotnet_version = "v3.0"
+    }
+  }
+
 }
 
 resource "azurerm_app_service" "uat" {
