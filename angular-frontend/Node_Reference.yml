@@ -16,7 +16,7 @@ stages:
        workingDir: 'angular-frontend'
        BuildCommand: 'run build-prod'
        CodeAnalysis: 'Sonarqube' 
-       #  Deploy: 'Terraform'
-       #  path: 'D:\a\1\drop\angular-frontend'
+       Deploy: 'Azure-App-Service'
+       path: 'D:\a\1\drop\angular-frontend'
        #  SecurityTest: 'Owasp'
       
