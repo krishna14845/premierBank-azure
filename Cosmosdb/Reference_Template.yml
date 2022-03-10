@@ -69,7 +69,7 @@ stages:
                  inputs:
                    provider: 'azurerm'
                    command: 'init'
-                   TemplatePath: '$(System.DefaultWorkingDirectory)/Cosmosdb/Terraform'
+                   workingDirectory: '$(System.DefaultWorkingDirectory)/Cosmosdb'
                    backendServiceArm: 'SPNMastekLabse3097'
                    backendAzureRmResourceGroupName: '$(terraformstoragerg)'
                    backendAzureRmStorageAccountName: '$(terraformstorageaccount)'
