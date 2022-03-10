@@ -39,15 +39,10 @@ stages:
                      Write-Host "##vso[task.setvariable variable=storagekey]$key"
                    azurePowerShellVersion: 'LatestVersion'
                 
-               - task: CopyFiles@2
-                 displayName: 'Copy Files to: $(System.DefaultWorkingDirectory)'
-                 inputs:
-                    SourceFolder: Cosmosdb/Terraform/terraform.tf
-                    TargetFolder: '$(System.DefaultWorkingDirectory)'
                                   
                - task: replacetokens@3
                  inputs:
-                   rootDirectory: 'Cosmosdb/Terraform'
+                   rootDirectory: 'Cosmosdb/terraform'
                    targetFiles: 'terraform.tf'
                    escapeType: none
                    tokenPrefix: '__'
@@ -71,7 +66,7 @@ stages:
                  inputs:
                    provider: 'azurerm'
                    command: 'init'
-                   workingDirectory: 'Cosmosdb/Terraform'
+                   workingDirectory: 'Cosmosdb/terraform'
                    backendServiceArm: 'SPNMastekLabse3097'
                    backendAzureRmResourceGroupName: '$(terraformstoragerg)'
                    backendAzureRmStorageAccountName: '$(terraformstorageaccount)'
@@ -83,14 +78,14 @@ stages:
                  inputs:
                    provider: 'azurerm'
                    command: 'plan'
-                   workingDirectory: 'Cosmosdb/Terraform'
+                   workingDirectory: 'Cosmosdb/terraform'
                    environmentServiceNameAzureRM: 'SPNMastekLabse3097'
                   
                - task: TerraformTaskV2@2
                  inputs:
                    provider: 'azurerm'
                    command: 'apply'
-                   workingDirectory: 'Cosmosdb/Terraform'
+                   workingDirectory: 'Cosmosdb/terraform'
                    commandOptions: '-auto-approve'
                    environmentServiceNameAzureRM: 'SPNMastekLabse3097'
                   
