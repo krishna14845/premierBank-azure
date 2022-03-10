@@ -1,4 +1,9 @@
-
+resources:
+ repositories:
+   - repository: PremierBankPOC
+     type: git
+     name: PremierBank/PremierBankPOC
+     ref: Fetaure3
 
 stages:
   - stage: DeployTerraform
