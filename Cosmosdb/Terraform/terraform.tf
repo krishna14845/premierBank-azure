@@ -17,8 +17,8 @@ provider "azurerm" {
  
 
 resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
-  location = var.resource_group_location
+  name     = "__rgTerraform__"
+  location = "__rgLocation__"
 }
 
 resource "random_integer" "ri" {
@@ -30,8 +30,8 @@ resource "random_integer" "ri" {
 
 resource "azurerm_cosmosdb_account" "db" {
   name                = "tfex-cosmos-db-${random_integer.ri.result}"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
   offer_type          = "Standard"
   #   kind                = "MongoDB"
 
@@ -65,7 +65,7 @@ resource "azurerm_cosmosdb_account" "db" {
   # }
 
   geo_location {
-    location          = azurerm_resource_group.rg.location
+    location          = "${azurerm_resource_group.rg.location}"
     failover_priority = 0
   }
 }
@@ -76,8 +76,8 @@ resource "azurerm_cosmosdb_account" "db" {
 
 resource "azurerm_cosmosdb_sql_database" "db" {
   name                = "cosmos_sqldb_432"
-  resource_group_name = azurerm_resource_group.rg.name
-  account_name        = azurerm_cosmosdb_account.db.name
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  account_name        = "${azurerm_cosmosdb_account.db.name}"
   throughput          = 400
 }
 
@@ -86,9 +86,9 @@ resource "azurerm_cosmosdb_sql_database" "db" {
 
 resource "azurerm_cosmosdb_sql_container" "db" {
   name                  = "cosmosdb_container_432"
-  resource_group_name   = azurerm_resource_group.rg.name
-  account_name          = azurerm_cosmosdb_account.db.name
-  database_name         = azurerm_cosmosdb_sql_database.db.name
+  resource_group_name   = "${azurerm_resource_group.rg.name}"
+  account_name          = "${azurerm_cosmosdb_account.db.name}"
+  database_name         = "${azurerm_cosmosdb_sql_database.db.name}"
   partition_key_path    = "/definition/id"
   # partition_key_version = 1
   throughput            = 400
