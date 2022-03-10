@@ -16,7 +16,7 @@ variables:
 
 jobs:
 - deployment: Deploy
-  dependsOn: PremierBankPOC
+  # dependsOn: PremierBankPOC
   displayName: Deploy
   environment: dev
   pool: 
