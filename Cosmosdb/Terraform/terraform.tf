@@ -1,15 +1,13 @@
-# terraform {
-#   required_providers {
-#     azurerm = {
-#       source = "hashicorp/azurerm"
-#       version = "2.98.0"
-#     }
-#   }
-# }
-
-# provider "azurerm" {
-#   # Configuration options
-# }
+  terraform{
+  required_version =  ">= 0.11"
+  backend "azurerm"{
+    storage_account_name = "__terraformstorageaccount__"
+    container_name       = "terraform" 
+    key                  = "terraform.tfstate"
+    access_key           = "__storagekey__"
+    features{}
+  }
+} 
 
 provider "azurerm" {
     version = "~>2.0"
@@ -17,11 +15,6 @@ provider "azurerm" {
 
 }
  
-# resource "azurerm_subscription" "db" {
-#   # alias             = "examplesub"
-#   subscription_name = "MV - VS Enterprise Subscription – MPN"
-#   subscription_id   = "29121a4b-91eb-46e3-a2b3-6c0fcebfea54"
-# }
 
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
