@@ -2,8 +2,8 @@ resources:
  repositories:
    - repository: PremierBankPOC
      type: git
-     name: PremierBank/PremierBankPOC
-     ref: Fetaure3
+    #  name: PremierBank/PremierBankPOC
+    #  ref: Fetaure3
 
 stages:
   - stage: DeployTerraform
@@ -56,15 +56,25 @@ stages:
                  inputs:
                    terraformVersion: '0.12.3'
               
-               - task: TerraformTaskV1@0
-                 displayName: 'Terraform : azurerm'
+              #  - task: TerraformTaskV1@0
+              #    displayName: 'Terraform : azurerm'
+              #    inputs:
+              #       workingDirectory: Cosmosdb/Terraform
+              #       backendServiceArm: SPNMastekLabse3097
+              #       backendAzureRmResourceGroupName: '$(terraformstoragerg)'
+              #       backendAzureRmStorageAccountName: '$(terraformstorageaccount) '
+              #       backendAzureRmContainerName: terraform
+              #       backendAzureRmKey: terraform.tfstate
+               - task: TerraformTaskV2@2
                  inputs:
-                    workingDirectory: Cosmosdb/Terraform
-                    backendServiceArm: SPNMastekLabse3097
-                    backendAzureRmResourceGroupName: '$(terraformstoragerg)'
-                    backendAzureRmStorageAccountName: '$(terraformstorageaccount) '
-                    backendAzureRmContainerName: terraform
-                    backendAzureRmKey: terraform.tfstate
+                   provider: 'azurerm'
+                   command: 'init'
+                   workingDirectory: '$(System.DefaultWorkingDirectory)/Cosmosdb/Terraform'
+                   backendServiceArm: 'SPNMastekLabse3097'
+                   backendAzureRmResourceGroupName: '$(terraformstoragerg)'
+                   backendAzureRmStorageAccountName: '$(terraformstorageaccount)'
+                   backendAzureRmContainerName: 'terraform'
+                   backendAzureRmKey: 'terraform.tfstate'
 
                   
                - task: TerraformTaskV2@2
