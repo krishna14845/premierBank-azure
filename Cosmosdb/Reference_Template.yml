@@ -1,91 +1,11 @@
-
+resources:
+    repositories:
+        - repository: Azure-Template
+          type: git
+          name: PremierBank/Azure-Template
+          ref: main
 
 stages:
-  - stage: DeployTerraform
-    variables:
-         - group: 'Yaml-cosmos-variable'
-    jobs:
-      - deployment:
-        pool:
-          vmImage: "windows-latest"
-          name: Azure Pipelines
-        environment: 'Dev'
-        strategy:
-         runOnce:
-           deploy:
-             steps:
-               - task: AzureCLI@1
-                 inputs:
-                   azureSubscription: 'SPNMastekLabse3097'
-                   scriptLocation: 'inlineScript'
-                   inlineScript: |
-                         call az group create --location southindia --name $(terraformstoragerg)
-     
-                          call az storage account create --name $(terraformstorageaccount) --resource-group $(terraformstoragerg) --location southindia --sku Standard_LRS
-                          
-                          call az storage container create --name terraform --account-name  $(terraformstorageaccount) 
-                          
-                          call az storage account keys list -g $(terraformstoragerg) -n $(terraformstorageaccount) 
-
-
-           
-               - task: AzurePowerShell@3
-                 inputs:
-                   azureSubscription: 'SPNMastekLabse3097'
-                   ScriptType: 'InlineScript'
-                   Inline: |
-                     $key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(terraformstoragerg) -AccountName $(terraformstorageaccount)).Value[0]
-                                          
-                     Write-Host "##vso[task.setvariable variable=storagekey]$key"
-                   azurePowerShellVersion: 'LatestVersion'
-                
-                                  
-               - task: replacetokens@3
-                 inputs:
-                   rootDirectory: 'Cosmosdb/terraform'
-                   targetFiles: 'terraform.tf'
-                   escapeType: none
-                   tokenPrefix: '__'
-                   tokenSuffix: '__'
-                   
-               - task: TerraformInstaller@0
-                 inputs:
-                   terraformVersion: 'latest'
-              
-              #  - task: TerraformTaskV1@0
-              #    displayName: 'Terraform : azurerm'
-              #    inputs:
-              #       workingDirectory: $(System.DefaultWorkingDirectory)/Cosmosdb/Terraform
-              #       backendServiceArm: SPNMastekLabse3097
-              #       backendAzureRmResourceGroupName: '$(terraformstoragerg)'
-              #       backendAzureRmStorageAccountName: '$(terraformstorageaccount) '
-              #       backendAzureRmContainerName: terraform
-              #       backendAzureRmKey: terraform.tfstate
-
-               - task: TerraformTaskV2@2
-                 inputs:
-                   provider: 'azurerm'
-                   command: 'init'
-                   workingDirectory: 'Cosmosdb/terraform'
-                   backendServiceArm: 'SPNMastekLabse3097'
-                   backendAzureRmResourceGroupName: '$(terraformstoragerg)'
-                   backendAzureRmStorageAccountName: '$(terraformstorageaccount)'
-                   backendAzureRmContainerName: 'terraform'
-                   backendAzureRmKey: 'terraform.tfstate'
-
-                  
-               - task: TerraformTaskV2@2
-                 inputs:
-                   provider: 'azurerm'
-                   command: 'plan'
-                   workingDirectory: 'Cosmosdb/terraform'
-                   environmentServiceNameAzureRM: 'SPNMastekLabse3097'
-                  
-               - task: TerraformTaskV2@2
-                 inputs:
-                   provider: 'azurerm'
-                   command: 'apply'
-                   workingDirectory: 'Cosmosdb/terraform'
-                   commandOptions: '-auto-approve'
-                   environmentServiceNameAzureRM: 'SPNMastekLabse3097'
-                  
+    - template: Azure_Main_Template.yml@Azure-Template
+      parameters:
+         ApplicationType: 'cosmosdb'  # .Net,Node
