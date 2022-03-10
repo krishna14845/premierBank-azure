@@ -89,8 +89,3 @@ stages:
                    commandOptions: '-auto-approve'
                    environmentServiceNameAzureRM: 'SPNMastekLabse3097'
                   
-- task: TerraformInstaller@0
-  inputs:
-    terraformVersion: 'latest'
-
-
