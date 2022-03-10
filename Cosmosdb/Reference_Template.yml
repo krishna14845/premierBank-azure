@@ -7,6 +7,8 @@
 
 stages:
   - stage: Build
+    variables:
+      - group: 'YAML-Front-Terraform'
     jobs:
       - job: BuildWebApp
         pool:
