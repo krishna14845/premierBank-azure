@@ -9,3 +9,4 @@ stages:
     - template: Azure_Main_Template.yml@Azure-Template
       parameters:
          ApplicationType: 'cosmosdb'  # .Net,Node
+         Deploy: 'cosmos-infra-provision'
