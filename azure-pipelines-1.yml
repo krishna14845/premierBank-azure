@@ -54,7 +54,7 @@ stages:
                - task: TerraformTaskV1@0
                  displayName: 'Terraform : azurerm'
                  inputs:
-                    workingDirectory: '$(System.DefaultWorkingDirectory)/Cosmosdb/Terraform'
+                    workingDirectory: Cosmosdb/Terraform
                     backendServiceArm: SPNMastekLabse3097
                     backendAzureRmResourceGroupName: '$(terraformstoragerg)'
                     backendAzureRmStorageAccountName: '$(terraformstorageaccount) '
