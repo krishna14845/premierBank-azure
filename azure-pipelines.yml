@@ -1,0 +1,40 @@
+
+# Explicitly set none for repositry trigger
+trigger:
+- none
+
+resources:
+  pipelines:
+  - pipeline: 'PremierBankRelease' # Name of the pipeline resource
+    source: PremierBankPOC  # Name of the triggering pipeline
+    trigger: 
+      branches:
+      - Fetaure3
+
+variables:
+  vmImageName: "vs2017-win2016"
+
+jobs:
+- deployment: Deploy
+  dependsOn: PremierBankPOC
+  displayName: Deploy
+  environment: dev
+  pool: 
+    vmImage: $(vmImageName)
+  strategy:
+    runOnce:
+      deploy:
+        steps: 
+
+
+
+        - task: AzureRmWebAppDeployment@4
+          displayName: 'Deploy Azure App Service'
+          inputs:
+              azureSubscription: SPNMastekLabse3097
+              WebAppName: 'webapp-frontend'
+              # deployToSlotOrASE: true
+              ResourceGroupName: 'Premier_Bank'
+              # SlotName: slot
+              packageForLinux: ' D:\a\1\PremierBankRelease\drop\angular-frontend'
+              # packageForLinux: '${{parameters.path}}'
