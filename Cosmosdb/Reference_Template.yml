@@ -1,58 +1,66 @@
-# resources:
-#  repositories:
-#    - repository: PremierBankPOC
-#      type: git
-#      name: PremierBank/PremierBankPOC
-#      ref: Fetaure3
+resources:
+ repositories:
+   - repository: PremierBankPOC
+     type: git
+     name: PremierBank/PremierBankPOC
+     ref: Fetaure3
 
 stages:
-  - stage: Build
+  - stage: DeployTerraform
     variables:
-      - group: 'YAML-Front-Terraform'
+         - group: 'Yaml-cosmos-variable'
     jobs:
-      - job: BuildWebApp
+      - deployment:
         pool:
-          vmImage: "vs2017-win2016"
+          vmImage: "windows-latest"
           name: Azure Pipelines
-          
-
-          steps:
-          - task: AzureCLI@1
-            inputs:
-              azureSubscription: 'SPNMastekLabse3097'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                    call az group create --location southindia --name $(terraformstoragerg)
+        environment: 'Dev'
+        strategy:
+         runOnce:
+           deploy:
+             steps:
+               - task: AzureCLI@1
+                 inputs:
+                   azureSubscription: 'SPNMastekLabse3097'
+                   scriptLocation: 'inlineScript'
+                   inlineScript: |
+                         call az group create --location southindia --name $(terraformstoragerg)
      
-                    call az storage account create --name $(terraformstorageaccount) --resource-group $(terraformstoragerg) --location southindia --sku Standard_LRS
+                          call az storage account create --name $(terraformstorageaccount) --resource-group $(terraformstoragerg) --location southindia --sku Standard_LRS
                           
-                    call az storage container create --name terraform --account-name  $(terraformstorageaccount) 
+                          call az storage container create --name terraform --account-name  $(terraformstorageaccount) 
                           
-                    call az storage account keys list -g $(terraformstoragerg) -n $(terraformstorageaccount) 
+                          call az storage account keys list -g $(terraformstoragerg) -n $(terraformstorageaccount) 
 
 
            
-          - task: AzurePowerShell@3
-            inputs:
-              azureSubscription: 'SPNMastekLabse3097'
-              ScriptType: 'InlineScript'
-              Inline: |
-                $key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(terraformstoragerg) -AccountName $(terraformstorageaccount)).Value[0]
+               - task: AzurePowerShell@3
+                 inputs:
+                   azureSubscription: 'SPNMastekLabse3097'
+                   ScriptType: 'InlineScript'
+                   Inline: |
+                     $key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(terraformstoragerg) -AccountName $(terraformstorageaccount)).Value[0]
                                           
-                Write-Host "##vso[task.setvariable variable=storagekey]$key"
-              azurePowerShellVersion: 'LatestVersion'
-                  
-          - task: replacetokens@3
-            inputs:
-              rootDirectory: 'Cosmosdb/Terraform'
-              targetFiles: 'terraform.tf'
-              escapeType: none
-              tokenPrefix: '__'
-              tokenSuffix: '__'
+                     Write-Host "##vso[task.setvariable variable=storagekey]$key"
+                   azurePowerShellVersion: 'LatestVersion'
+                
+               - task: CopyFiles@2
+                 displayName: 'Copy Files to: $(System.DefaultWorkingDirectory)'
+                 inputs:
+                    SourceFolder: Cosmosdb/Terraform/terraform.tf
+                    TargetFolder: '$(System.DefaultWorkingDirectory)'
+                                  
+               - task: replacetokens@3
+                 inputs:
+                   rootDirectory: 'Cosmosdb/Terraform'
+                   targetFiles: 'terraform.tf'
+                   escapeType: none
+                   tokenPrefix: '__'
+                   tokenSuffix: '__'
                    
-          - task: TerraformInstaller@0
-            inputs:
-              terraformVersion: '0.12.3'
+               - task: TerraformInstaller@0
+                 inputs:
+                   terraformVersion: '0.12.3'
               
               #  - task: TerraformTaskV1@0
               #    displayName: 'Terraform : azurerm'
@@ -63,32 +71,32 @@ stages:
               #       backendAzureRmStorageAccountName: '$(terraformstorageaccount) '
               #       backendAzureRmContainerName: terraform
               #       backendAzureRmKey: terraform.tfstate
-          - task: TerraformTaskV2@2
-            inputs:
-              provider: 'azurerm'
-              command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/Cosmosdb'
-              backendServiceArm: 'SPNMastekLabse3097'
-              backendAzureRmResourceGroupName: '$(terraformstoragerg)'
-              backendAzureRmStorageAccountName: '$(terraformstorageaccount)'
-              backendAzureRmContainerName: 'terraform'
-              backendAzureRmKey: 'terraform.tfstate'
+               - task: TerraformTaskV2@2
+                 inputs:
+                   provider: 'azurerm'
+                   command: 'init'
+                   workingDirectory: '$(System.DefaultWorkingDirectory)/Cosmosdb/Terraform'
+                   backendServiceArm: 'SPNMastekLabse3097'
+                   backendAzureRmResourceGroupName: '$(terraformstoragerg)'
+                   backendAzureRmStorageAccountName: '$(terraformstorageaccount)'
+                   backendAzureRmContainerName: 'terraform'
+                   backendAzureRmKey: 'terraform.tfstate'
 
                   
-              #  - task: TerraformTaskV2@2
-              #    inputs:
-              #      provider: 'azurerm'
-              #      command: 'plan'
-              #      workingDirectory: 'Cosmosdb/Terraform'
-              #      environmentServiceNameAzureRM: 'SPNMastekLabse3097'
+               - task: TerraformTaskV2@2
+                 inputs:
+                   provider: 'azurerm'
+                   command: 'plan'
+                   workingDirectory: 'Cosmosdb/Terraform'
+                   environmentServiceNameAzureRM: 'SPNMastekLabse3097'
                   
-              #  - task: TerraformTaskV2@2
-              #    inputs:
-              #      provider: 'azurerm'
-              #      command: 'apply'
-              #      workingDirectory: 'Cosmosdb/Terraform'
-              #      commandOptions: '-auto-approve'
-              #      environmentServiceNameAzureRM: 'SPNMastekLabse3097'
+               - task: TerraformTaskV2@2
+                 inputs:
+                   provider: 'azurerm'
+                   command: 'apply'
+                   workingDirectory: 'Cosmosdb/Terraform'
+                   commandOptions: '-auto-approve'
+                   environmentServiceNameAzureRM: 'SPNMastekLabse3097'
                   
 
 
