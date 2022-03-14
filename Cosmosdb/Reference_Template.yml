@@ -13,5 +13,5 @@ stages:
          JsonFilePath: 'Cosmosdb/Json_File'
 
          Deploy: 'cosmos-infra-provision'
-         cosmosDatabase: 'test-assettracker'
+         cosmosDatabase: 'test-celerops'
          cosmosContainer: 'demo_432'
