@@ -12,6 +12,6 @@ stages:
          TerraformFilePath: 'Cosmosdb/terraform'
          JsonFilePath: 'Cosmosdb/Json_File'
          Deploy: 'cosmos-infra-provision'
-         environment: 'Dev'
+         environment: 'Uat'
          cosmosDatabase: 'test-variable'
          cosmosContainer: 'demo_432'
