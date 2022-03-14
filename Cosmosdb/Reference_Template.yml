@@ -11,4 +11,7 @@ stages:
          ApplicationType: 'cosmosdb'  # .Net,Node
          TerraformFilePath: 'Cosmosdb/terraform'
          JsonFilePath: 'Cosmosdb/Json_File'
+
          Deploy: 'cosmos-infra-provision'
+         cosmosDatabase: 'test-assettracker'
+         cosmosContainer: 'demo_432'
