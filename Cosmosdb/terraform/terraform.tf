@@ -89,7 +89,7 @@ resource "azurerm_cosmosdb_sql_container" "db" {
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   account_name          = "${azurerm_cosmosdb_account.db.name}"
   database_name         = "${azurerm_cosmosdb_sql_database.db.name}"
-  partition_key_path    = "/species"
+  partition_key_path    = "/demo_partition121/species"
   # partition_key_version = 1
   throughput            = 400
 
