@@ -15,3 +15,4 @@ stages:
          environment: 'Uat'
          cosmosDatabase: 'test-variable'
          cosmosContainer: 'Clothes203'
+         cosmosPartition: '/ClothesId'
