@@ -11,7 +11,6 @@
 
 provider "azurerm" {
     version = "~>2.0"
-    // version = "~> 2.65"
     features {}
 
 }
@@ -86,32 +85,34 @@ resource "azurerm_cosmosdb_sql_database" "db" {
 # Cosmos db Sql Container
 
 resource "azurerm_cosmosdb_sql_container" "db" {
-  name                  = "cosmosdb_container_432"
+  name                  = "Clothes-${random_integer.ri.result}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   account_name          = "${azurerm_cosmosdb_account.db.name}"
   database_name         = "${azurerm_cosmosdb_sql_database.db.name}"
-  partition_key_path    = "/id"
+  partition_key_path    = "/ClothesId"
   # partition_key_version = 1
   throughput            = 400
 
-   indexing_policy {
-     indexing_mode = "Consistent"
+} 
 
-     included_path {
-       path = "/*"
-     }
+  //  indexing_policy {
+  //    indexing_mode = "Consistent"
 
-     included_path {
-       path = "/included/?"
-     }
+  //    included_path {
+  //      path = "/*"
+  //    }
 
-     excluded_path {
-       path = "/excluded/?"
-     }
-   }
+  //    included_path {
+  //      path = "/included/?"
+  //    }
+
+  //    excluded_path {
+  //      path = "/excluded/?"
+  //    }
+  //  }
 
   // unique_key {
   //   paths = ["/definition/idlong", "/definition/idshort"]
   // }
-}
+
 
