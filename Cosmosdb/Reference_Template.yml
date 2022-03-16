@@ -14,5 +14,5 @@ stages:
          Deploy: 'cosmos-infra-provision'
          environment: 'Uat'
          cosmosDatabase: 'test-variable'
-         cosmosContainer: 'Books203'
-         cosmosPartition: '/BooksId'
+         cosmosContainer: 'Clothes203'
+         cosmosPartition: '/ClothesId'
