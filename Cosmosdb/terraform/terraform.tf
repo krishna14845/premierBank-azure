@@ -71,29 +71,29 @@ resource "azurerm_cosmosdb_account" "db" {
 }
 
 
-# Cosmos Db sql Database
+// # Cosmos Db sql Database
 
 
-resource "azurerm_cosmosdb_sql_database" "db" {
-  name                = "cosmos_sqldb_432"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
-  account_name        = "${azurerm_cosmosdb_account.db.name}"
-  throughput          = 400
-}
+// resource "azurerm_cosmosdb_sql_database" "db" {
+//   name                = "cosmos_sqldb_432"
+//   resource_group_name = "${azurerm_resource_group.rg.name}"
+//   account_name        = "${azurerm_cosmosdb_account.db.name}"
+//   throughput          = 400
+// }
 
 
-# Cosmos db Sql Container
+// # Cosmos db Sql Container
 
-resource "azurerm_cosmosdb_sql_container" "db" {
-  name                  = "Clothes-${random_integer.ri.result}"
-  resource_group_name   = "${azurerm_resource_group.rg.name}"
-  account_name          = "${azurerm_cosmosdb_account.db.name}"
-  database_name         = "${azurerm_cosmosdb_sql_database.db.name}"
-  partition_key_path    = "/ClothesId"
-  # partition_key_version = 1
-  throughput            = 400
+// resource "azurerm_cosmosdb_sql_container" "db" {
+//   name                  = "Clothes-${random_integer.ri.result}"
+//   resource_group_name   = "${azurerm_resource_group.rg.name}"
+//   account_name          = "${azurerm_cosmosdb_account.db.name}"
+//   database_name         = "${azurerm_cosmosdb_sql_database.db.name}"
+//   partition_key_path    = "/ClothesId"
+//   # partition_key_version = 1
+//   throughput            = 400
 
-} 
+// } 
 
   //  indexing_policy {
   //    indexing_mode = "Consistent"
