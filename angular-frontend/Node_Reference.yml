@@ -19,5 +19,5 @@ stages:
       #  Deploy: 'Azure-App-Service'
       #  path: 'D:\a\1\drop\angular-frontend'
        SecurityTest: 'Owasp'
-       Owasp_url: 'https://dev.azure.com/RM2-DEV/RM2-Clarity/_git/AssetRecoveryFrontEnd'
+       Owasp_url: 'https://dev.azure.com/RM2-DEV/RM2-Clarity/_git/AssetRecoveryFrontEnd/'
       
