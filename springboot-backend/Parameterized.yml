@@ -9,11 +9,11 @@ stages:
     - template: Azure_Main_Template.yml@Azure-Template
       parameters:
          ApplicationType: 'java'  # .Net,Node
-        #  Version: 1.8  # 11
-        #  BuildTool: 'Maven'  #npm, MS Build
-        #  CodeCoverage: 'Sonarqube'  # sonarcloud
-        #  Deploy: 'Java-App-Service' #Java_Terraform , Java-App-Service
-        #  path: 'D:\a\1\drop\springboot-backend\target'
+         Version: 1.8  # 11
+         BuildTool: 'Maven'  #npm, MS Build
+         CodeCoverage: 'Sonarqube'  # sonarcloud
+         #  Deploy: 'Java-App-Service' #Java_Terraform , Java-App-Service
+         #  path: 'D:\a\1\drop\springboot-backend\target'
          SecurityTest: 'Owasp' #Burp Suite, Veracode
          Owasp_url: 'https://dev.azure.com/RM2-DEV/RM2-Clarity/_git/AssetTrackerAPI?version=GBmain'
-        #  FunctionalTest: 'Test'
+         #  FunctionalTest: 'Test'
