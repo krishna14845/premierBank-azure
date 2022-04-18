@@ -33,7 +33,7 @@ spec:
 
         - containerPort: 6379
 
-          name: redis
+          # name: redis
 
 ---
 
