@@ -16,8 +16,8 @@ stages:
        workingDir: 'angular-frontend'
        BuildCommand: 'run build-prod'
        CodeAnalysis: 'Sonarqube' 
-      #  Deploy: 'Azure-App-Service'
-      #  path: 'D:\a\1\drop\angular-frontend'
-       SecurityTest: 'Owasp'
-       Owasp_url: 'https://webapp-backend01.azurewebsites.net/'
+       Deploy: 'Azure-App-Service'
+       path: 'D:\a\1\drop\angular-frontend'
+       #  SecurityTest: 'Owasp'
+       # Owasp_url: 'https://webapp-backend01.azurewebsites.net/'
       
