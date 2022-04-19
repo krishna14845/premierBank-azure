@@ -28,9 +28,9 @@ services:
     #Environment variables for Spring Boot Application.
     environment:
       - DB_SERVER=mysqlserver-backend.mysql.database.azure.com
-      - POSTGRES_DB=primeBank
-      - POSTGRES_USER=Admin123@mysqlserver-backend
-      - POSTGRES_PASSWORD=admin@123
+      - MYSQL_DB=primeBank
+      - MYSQL_USER=Admin123@mysqlserver-backend
+      - MYSQL_PASSWORD=admin@123
     ports:
       - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
     # links:
