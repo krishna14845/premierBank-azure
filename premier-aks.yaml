@@ -46,7 +46,7 @@ metadata:
   name: premier-back
 
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
 
   - port: 80
