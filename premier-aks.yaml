@@ -33,7 +33,7 @@ spec:
 
         - containerPort: 6379
 
-          # name: redis
+          name: premier
 
 ---
 
@@ -113,11 +113,11 @@ spec:
 
             cpu: 500m
 
-        # env:
+        env:
 
-        # - name: REDIS
+        - name: premier
 
-        #   value: "mhc-back"
+          value: "premier-back"
 
 ---
 
