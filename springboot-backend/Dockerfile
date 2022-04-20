@@ -8,4 +8,9 @@ RUN mvn -f pom.xml clean package
 FROM openjdk:8-alpine
 COPY --from=build /workspace/target/*.jar app.jar
 EXPOSE 8080
+
+ENV DBURL=jdbc:mysql://mysqlserver-backend.mysql.database.azure.com DBUSER=Admin123@mysqlserver-backend DBPASS=admin@123 DBNAME=primeBank
+
 ENTRYPOINT ["java","-jar","app.jar"]
+
+
