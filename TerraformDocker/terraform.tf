@@ -23,7 +23,7 @@ terraform {
 }
 
 resource "azurerm_resource_group" "aks-rg" {
-  name     = "__rgTerraform__"
+  name     = "__rgaks__"
   location = "__location__"
 }
 
