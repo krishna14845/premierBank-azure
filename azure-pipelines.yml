@@ -1,0 +1,41 @@
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildWebApp
+        pool:
+          vmImage: "ubuntu-18.04"
+          name: Azure Pipelines
+
+        steps:
+        - task: DockerCompose@0
+          displayName: 'Build services'
+          inputs:
+            azureSubscription: SPNSubscription20e84
+            azureContainerRegistry: '{"loginServer":"premieracr203.azurecr.io", "id" : "/subscriptions/fb5eefd5-9b03-48bd-a8c6-47ea6f020e84/resourceGroups/premier_aks_rg/providers/Microsoft.ContainerRegistry/registries/premieracr203"}'
+            dockerComposeFile: 'docker-compose.yml'
+            dockerComposeFileArgs: 'DOCKER_BUILD_SOURCE='
+            action: 'Build services'
+            additionalImageTags: '$(Build.BuildId)'
+            includeLatestTag: true
+
+        - task: DockerCompose@0
+          displayName: 'Push services'
+          inputs:
+            azureSubscription: SPNSubscription20e84
+            azureContainerRegistry: '{"loginServer":"premieracr203.azurecr.io", "id" : "/subscriptions/fb5eefd5-9b03-48bd-a8c6-47ea6f020e84/resourceGroups/premier_aks_rg/providers/Microsoft.ContainerRegistry/registries/premieracr203"}'
+            dockerComposeFile: 'docker-compose.yml'
+            dockerComposeFileArgs: 'DOCKER_BUILD_SOURCE='
+            action: 'Push services'
+            additionalImageTags: '$(Build.BuildId)'
+            includeLatestTag: true
+
+        - task: CopyFiles@2
+          displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+          inputs:
+            Contents: '**/premier-aks.yaml'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact: drop'
+
+
