@@ -60,5 +60,5 @@ stages:
                  kubernetesCluster: 'premier-akscluster'
                  command: apply
                  useConfigurationFile: true
-                 configuration: '$(System.DefaultWorkingDirectory)/_PremierBank-CI (1)/drop/premier-aks.yaml'
+                 configuration: '/home/vsts/work/1/drop/premier-aks.yaml'
                  checkLatest: true
