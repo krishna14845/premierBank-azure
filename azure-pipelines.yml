@@ -39,3 +39,26 @@ stages:
           displayName: 'Publish Artifact: drop'
 
 
+  - stage: Deploy
+    jobs:
+      - deployment: 
+        pool:
+          vmImage: "ubuntu-18.04"
+          name: Azure Pipelines
+        environment: 'Dev'
+        strategy:
+         runOnce:
+           deploy:
+             steps:
+              
+             - task: Kubernetes@1
+               displayName: 'kubectl apply'
+               inputs:
+                 connectionType: 'Azure Resource Manager'
+                 azureSubscriptionEndpoint: SPNSubscription20e84
+                 azureResourceGroup: 'premier_aks_rg'
+                 kubernetesCluster: 'premier-akscluster'
+                 command: apply
+                 useConfigurationFile: true
+                 configuration: '$(System.DefaultWorkingDirectory)/_PremierBank-CI (1)/drop/premier-aks.yaml'
+                 checkLatest: true
