@@ -20,7 +20,7 @@ import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.Employee;
 import net.javaguides.springboot.repository.EmployeeRepository;
 
-@CrossOrigin(origins = {"http://webapp-frontend.azurewebsites.net","http://52.154.249.206"
+@CrossOrigin(origins = {"http://webapp-frontend.azurewebsites.net","http://52.154.249.206", "https://team-sagarjadhav-steelthreading-docker.zeet-team-sagarjadhav.zeet.app/"
 				// ,"https://web-app-frontend-slot.azurewebsites.net"
 	})
 
