@@ -23,7 +23,7 @@ import net.javaguides.springboot.repository.EmployeeRepository;
 // @CrossOrigin(origins = {"http://webapp-frontend.azurewebsites.net","http://52.154.249.206", "https://team-sagarjadhav-steelthreading-docker.zeet-team-sagarjadhav.zeet.app/"
 				// ,"https://web-app-frontend-slot.azurewebsites.net"
 	// })
-@CrossOrigin(origins = {"https://team-sagarjadhav-steelthreading-docker.zeet-team-sagarjadhav.zeet.app"})
+@CrossOrigin(origins = {"https://team-sagar-frontend-premierbankfrontend.zeet-team-sagar-frontend.zeet.app"})
 
 @RestController
 @RequestMapping("/api/v1/")
