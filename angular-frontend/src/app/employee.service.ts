@@ -9,7 +9,8 @@ import { Employee } from './employee';
 export class EmployeeService {
 
   // private baseURL = "https://webapp-backend01.azurewebsites.net/api/v1/employees";
-  private baseURL = "http://40.89.250.230:8080/api/v1/employees";
+//   private baseURL = "http://40.89.250.230:8080/api/v1/employees";
+  private baseURL = "https://team-sagar-frontend-backend.zeet-team-sagar-frontend.zeet.app/api/v1/employees";
 
   constructor(private httpClient: HttpClient) { }
 
