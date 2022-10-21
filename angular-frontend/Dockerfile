@@ -9,5 +9,5 @@ RUN npm run build --prod
 
 # Stage 2
 
-FROM nginx:alpine
+FROM nginx:1.23.2-alpine
 COPY --from=node /app/dist/angular-frontend /usr/share/nginx/html 
